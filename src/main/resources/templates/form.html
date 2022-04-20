@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <script>
+        function showPart2() {
+            let targetValue = document.getElementById("datetime").value;
+            if(targetValue == ""){
+                document.getElementById("part2").style.visibility = "hidden";
+            }else{
+                let date = new Date(targetValue);
+                let hours = date.getHours();
+                if( hours < 9 || hours > 17){
+                    date.setUTCHours(9, 0, 0, 0);
+                }else{
+                    date.setUTCHours(hours, 0, 0, 0);
+                }
+                document.getElementById("datetime").value = date.toISOString().substring(0, 16);
+                document.getElementById("part2").style.visibility = "";
+            }
+        }
+    </script>
+    <body>
+        <form action="#" th:action="@{/}" method="post">
+            <div style="margin: 15px">
+                <div>
+                    <label>Date:</label>
+                    <input id="datetime" type="datetime-local" name="dateTime" onchange="showPart2()"
+                           min="09:00" max="17:00" step="3600"/>
+                </div>
+                <div id="part2" style="visibility: hidden">
+                    <div>
+                        <label>Name:</label>
+                        <input type="text" name="name"/>
+                    </div>
+                    <div>
+                        <label>Email:</label>
+                        <input type="email" name="email" />
+                    </div>
+                    <div>
+                        <label>Services:</label>
+                        <select name="service" multiple>
+                            <option selected="selected" value="A">Service A</option>
+                            <option value="B">Service B</option>
+                            <option value="C">Service C</option>
+                            <option value="D">Service D</option>
+                            <option value="E">Service E</option>
+                        </select>
+                    </div>
+                    <div><button type="submit">Submit</button></div>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    td{
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+</style>
+<body>
+    <div>
+        <div>
+            Simple table
+        </div>
+        <table th:if="${data}" >
+            <tr>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Service</th>
+            </tr>
+            <tr th:each="request : ${data}">
+                <td th:text="${request.getDateTime()}"></td>
+                <td th:text="${request.getName()}"></td>
+                <td th:text="${request.getEmail()}"></td>
+                <td th:text="${request.getServicesAsString()}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
